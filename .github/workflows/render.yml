@@ -36,16 +36,11 @@ jobs:
 
       - name: Render PDF and per-slide SVGs
         run: |
-          compile() {
-            out=$(typst compile --font-path fonts "$@" 2>&1) || { printf '%s\n' "$out"; exit 1; }
-            printf '%s\n' "$out"
-            case $out in
-              *'warning:'*) echo '::error::typst emitted warnings'; exit 1 ;;
-            esac
-          }
           rm -rf slides && mkdir slides
-          compile main.typ main.pdf
-          compile main.typ 'slides/slide-{p}.svg'
+          out=$(typst compile --font-path fonts main.typ main.pdf 2>&1) || { printf '%s\n' "$out"; exit 1; }
+          printf '%s\n' "$out"
+          [[ $out == *warning:* ]] && exit 1
+          typst compile --font-path fonts main.typ 'slides/slide-{p}.svg'
 
       - name: Embed slides into README
         run: python3 .github/scripts/embed_slides.py
