@@ -15,7 +15,7 @@ fonts/         font fetch script target (Iosevka SS07; gitignored, see fonts/REA
 ## Preview
 
 <!-- slides:start -->
-| Slides (14) |
+| Slides (13) |
 | --- |
 | ![Slide 01](slides/slide-01.svg) |
 | ![Slide 02](slides/slide-02.svg) |
@@ -30,7 +30,6 @@ fonts/         font fetch script target (Iosevka SS07; gitignored, see fonts/REA
 | ![Slide 11](slides/slide-11.svg) |
 | ![Slide 12](slides/slide-12.svg) |
 | ![Slide 13](slides/slide-13.svg) |
-| ![Slide 14](slides/slide-14.svg) |
 <!-- slides:end -->
 
 ## Quick start
