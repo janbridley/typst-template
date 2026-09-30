@@ -93,6 +93,22 @@
 })
 
 
+/// Vertical geometry of the title slide, as explicit fixed buffers.
+///
+/// The stack is anchored to the top of the content area rather than centred, so
+/// each buffer is literally the gap it claims to be; `top` is set so the orange
+/// rule lands on the vertical centre of the page, and whatever height is left
+/// over falls below the last detail line.
+#let title-slide-unit = 6pt
+#let title-slide-pad = (
+  top: 15 * title-slide-unit,   //  90pt: content top -> title (puts the rule on center)
+  pair: 5 * title-slide-unit,   //  30pt: title -> subtitle
+  rule: 3 * title-slide-unit,   //  18pt: subtitle -> orange rule
+  group: 16 * title-slide-unit, //  96pt: orange rule -> first detail line
+  line: 4 * title-slide-unit,   //  24pt: between the detail lines
+)
+
+
 /// Title slide. Fill the details via `config-info(..)` or pass them here:
 ///   #title-slide(subtitle: [..], author: [..], date: [..])
 #let title-slide(config: (:), ..args) = touying-slide-wrapper(self => {
@@ -102,41 +118,50 @@
     config,
   )
   let info = self.info + args.named()
+  let pad = title-slide-pad
+  // only the detail lines that exist, so `pad.line` never leaves trailing gaps
+  let details = (
+    info.author,
+    if info.date != none { utils.display-info-date(self) } else { none },
+    info.institution,
+    info.contact,
+  ).filter(line => line != none)
   let body = {
-    set align(horizon)
+    // top-anchored: see `title-slide-pad`: the buffers below are the gaps
+    set align(top)
     block(width: 100%, {
+      v(pad.top)
       set text(
+        // title size; the subtitle and the detail lines are 3/4 of it, so they
+        // take `0.75em` here
         size: 2.1em,
         weight: "bold",
         fill: self.colors.neutral-darkest,
         font: self.store.title-font,
       )
-      block(info.title)
+      block(above: 0pt, below: 0pt, info.title)
       if info.subtitle != none {
-        v(0.6em)
-        set text(size: 1em, fill: self.colors.neutral-light)
-        block(info.subtitle)
+        set text(size: 0.75em, fill: self.colors.neutral-light)
+        v(pad.pair)
+        block(above: 0pt, below: 0pt, info.subtitle)
       }
-      v(1.3em)
-      // orange bar echoing the sidebar
-      block(width: 3in, height: 4pt, fill: self.colors.primary, spacing: 0pt)
-      v(1.3em)
-      set text(size: 0.75em, fill: self.colors.neutral-darkest)
-      if info.author != none {
-        block(spacing: 0.6em, info.author)
-      }
-      if info.date != none {
-        block(spacing: 0.6em, utils.display-info-date(self))
-      }
-      if info.institution != none {
-        block(spacing: 0.6em, info.institution)
-      }
-      if info.contact != none {
-        block(spacing: 0.6em, info.contact)
+      v(pad.rule)
+      // orange bar echoing the sidebar, sitting on the line above it
+      block(
+        above: 0pt, below: 0pt,
+        width: 3in, height: 4pt, fill: self.colors.primary, spacing: 0pt,
+      )
+      if details.len() > 0 {
+        v(pad.group)
+        set text(size: 0.75em, fill: self.colors.neutral-darkest)
+        for (i, line) in details.enumerate() {
+          if i > 0 { v(pad.line) }
+          block(above: 0pt, below: 0pt, spacing: pad.line, line)
+        }
       }
     })
   }
-  touying-slide(self: self, setting: align.with(left + horizon), body)
+  touying-slide(self: self, setting: align.with(left + top), body)
 })
 
 
