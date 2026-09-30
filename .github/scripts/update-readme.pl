@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # Rewrites the slide table between <!-- slides:start/end --> in README.md from
-# slides/slide-<n>.svg (one per PDF page, from `typst compile ... {p}.svg`).
+# slides/slide-<nn>.svg (one per PDF page, from `typst compile ... {0p}.svg`).
 # Exits non-zero if the slides or the markers are missing, so CI fails loudly.
 use strict;
 use warnings;

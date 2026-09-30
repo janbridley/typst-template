@@ -40,7 +40,7 @@ jobs:
           out=$(typst compile --font-path fonts main.typ main.pdf 2>&1) || { printf '%s\n' "$out"; exit 1; }
           printf '%s\n' "$out"
           [[ $out == *warning:* ]] && exit 1
-          typst compile --font-path fonts main.typ 'slides/slide-{p}.svg'
+          typst compile --font-path fonts main.typ 'slides/slide-{0p}.svg'
 
       - name: Embed slides into README
         run: perl .github/scripts/update-readme.pl
