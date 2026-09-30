@@ -26,14 +26,26 @@ jobs:
         with:
           cache-dependency-path: main.typ
 
+      # Extract the ```sh``` block from fonts/README.md
       - name: Fetch vendored fonts
-        run: sh scripts/fetch-fonts.sh # no-op if fonts/IosevkaSS07.ttc exists
+        run: |
+          if [ ! -f fonts/IosevkaSS07.ttc ]; then
+            awk '/^```sh$/{f=1;next} /^```$/{f=0} f' fonts/README.md | sh -e
+          fi
+          typst fonts --font-path fonts | grep -qix 'Iosevka SS07'
 
       - name: Render PDF and per-slide SVGs
         run: |
+          compile() {
+            out=$(typst compile --font-path fonts "$@" 2>&1) || { printf '%s\n' "$out"; exit 1; }
+            printf '%s\n' "$out"
+            case $out in
+              *'warning:'*) echo '::error::typst emitted warnings'; exit 1 ;;
+            esac
+          }
           rm -rf slides && mkdir slides
-          typst compile --font-path fonts main.typ main.pdf
-          typst compile --font-path fonts main.typ 'slides/slide-{p}.svg'
+          compile main.typ main.pdf
+          compile main.typ 'slides/slide-{p}.svg'
 
       - name: Embed slides into README
         run: python3 .github/scripts/embed_slides.py
