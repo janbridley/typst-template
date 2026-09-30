@@ -13,6 +13,7 @@
 // Requires typst >= 0.15 (touying 0.8.0).
 
 #import "@preview/touying:0.8.0": *
+#import "palette.typ": palette
 
 // Width of the sidebar art on a 16in-wide page (210.585 / 4800 * 16in).
 #let sidebar-width = 16in * (210.585 / 4800)
@@ -56,7 +57,7 @@
   }
   let footer(self) = {
     set align(bottom)
-    set text(size: 0.55em, fill: self.colors.neutral-light)
+    set text(size: 0.7em, fill: self.colors.neutral-light)
     pad(
       bottom: 0.15in,
       components.left-and-right(
@@ -279,12 +280,14 @@
       ),
     ),
     config-colors(
-      primary: rgb("#FB9B7D"),       // sidebar orange
-      primary-dark: rgb("#C6552E"),  // readable orange for text / alert
-      secondary: rgb("#989C97"),     // slash gray
-      neutral-light: rgb("#848884"),
+      // roles mapped from the brand palette (palette.typ)
+      primary: palette.orange,          // sidebar / accents
+      primary-dark: rgb("#C6552E"),     // readable darkened orange for text
+                                        // (derived; not in the SVG palette)
+      secondary: palette.purple,        // the palette's anchor color
+      neutral-light: palette.gray-dark, // meta text (footer, …)
       neutral-lightest: rgb("#FFFFFF"),
-      neutral-darkest: rgb("#232323"),
+      neutral-darkest: palette.ink,     // body text
     ),
     config-store(
       footer: footer,

@@ -3,6 +3,7 @@
 
 #import "@preview/touying:0.8.0": *
 #import "sidebar.typ": *
+#import "palette.typ": palette
 
 #show: sidebar-theme.with(
   config-info(
@@ -58,6 +59,19 @@ $ E = m c^2 $
 
 - Subsections (`===`) become slides at a deeper level.
 - Everything after `#show: appendix` below is appendix material.
+
+== Brand colors
+
+Every color lives in `palette.typ`; use `palette.orange`, `palette.teal`, …
+anywhere in the deck.
+
+#grid(
+  columns: (1fr, 1fr, 1fr, 1fr),
+  gutter: 0.6em,
+  ..(palette.purple, palette.orange, palette.pink, palette.yellow, palette.teal, palette.blue, palette.mint, palette.ink).map(
+    c => block(fill: c, height: 1in, radius: 6pt),
+  ),
+)
 
 #show: appendix
 
