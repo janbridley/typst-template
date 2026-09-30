@@ -15,7 +15,6 @@
     // logo: image("logo.svg", height: 0.5in),  // shows top-right of slides
   ),
 )
-
 #title-slide()
 
 #outline-slide(title: [Agenda])

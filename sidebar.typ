@@ -102,16 +102,6 @@
     config,
   )
   let info = self.info + args.named()
-  // invisible heading so the title is discoverable in the notes panel
-  if info.title != none {
-    place(hide(heading(
-      level: self.slide-level,
-      info.title,
-      bookmarked: false,
-      outlined: false,
-      numbering: none,
-    )))
-  }
   let body = {
     set align(horizon)
     block(width: 100%, {
