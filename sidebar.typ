@@ -255,8 +255,8 @@
   ..args,
   body,
 ) = {
-  set text(size: 26pt, font: body-font)
-  show raw: set text(font: code-font)
+  // NB: don't `set`/`show` anything in this leading region: otherwise we get
+  // blank leading pages, as in touying#394
 
   let background = {
     if background == auto {
@@ -295,6 +295,11 @@
       show-strong-with-alert: false,
     ),
     config-methods(
+      init: (self: none, body) => {
+        set text(size: 26pt, font: body-font)
+        show raw: set text(font: code-font)
+        body
+      },
       alert: (self: none, it) => text(
         fill: self.colors.accent,
         weight: "semibold",
