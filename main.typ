@@ -1,5 +1,5 @@
 // main.typ: Example slides
-// Compile with:  typst compile main.typ
+// Compile with:  typst compile --font-path fonts main.typ
 
 #import "@preview/touying:0.8.0": *
 #import "sidebar.typ": *
