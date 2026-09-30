@@ -17,15 +17,15 @@ fonts/         font fetch script target (Iosevka SS07; gitignored, see fonts/REA
 <!-- slides:start -->
 | Slides (14) |
 | --- |
-| ![Slide 1](slides/slide-1.svg) |
-| ![Slide 2](slides/slide-2.svg) |
-| ![Slide 3](slides/slide-3.svg) |
-| ![Slide 4](slides/slide-4.svg) |
-| ![Slide 5](slides/slide-5.svg) |
-| ![Slide 6](slides/slide-6.svg) |
-| ![Slide 7](slides/slide-7.svg) |
-| ![Slide 8](slides/slide-8.svg) |
-| ![Slide 9](slides/slide-9.svg) |
+| ![Slide 01](slides/slide-01.svg) |
+| ![Slide 02](slides/slide-02.svg) |
+| ![Slide 03](slides/slide-03.svg) |
+| ![Slide 04](slides/slide-04.svg) |
+| ![Slide 05](slides/slide-05.svg) |
+| ![Slide 06](slides/slide-06.svg) |
+| ![Slide 07](slides/slide-07.svg) |
+| ![Slide 08](slides/slide-08.svg) |
+| ![Slide 09](slides/slide-09.svg) |
 | ![Slide 10](slides/slide-10.svg) |
 | ![Slide 11](slides/slide-11.svg) |
 | ![Slide 12](slides/slide-12.svg) |
