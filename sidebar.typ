@@ -37,7 +37,12 @@
         components.left-and-right(
           block(width: 100%, {
             // slide title (explicit `title:` argument, else the current heading)
-            set text(size: 1.6em, weight: "bold", tracking: 0.02em)
+            set text(
+              size: 1.6em,
+              weight: "bold",
+              tracking: 0.02em,
+              font: self.store.title-font,
+            )
             utils.fit-to-width(
               grow: false,
               100%,
@@ -110,7 +115,12 @@
   let body = {
     set align(horizon)
     block(width: 100%, {
-      set text(size: 2.1em, weight: "bold", fill: self.colors.neutral-darkest)
+      set text(
+        size: 2.1em,
+        weight: "bold",
+        fill: self.colors.neutral-darkest,
+        font: self.store.title-font,
+      )
       block(info.title)
       if info.subtitle != none {
         v(0.6em)
@@ -145,7 +155,12 @@
   let setting(body) = {
     set align(horizon)
     block(width: 100%, {
-      set text(size: 1.9em, weight: "bold", fill: self.colors.neutral-darkest)
+      set text(
+        size: 1.9em,
+        weight: "bold",
+        fill: self.colors.neutral-darkest,
+        font: self.store.title-font,
+      )
       utils.display-current-heading(level: 1)
       v(0.8em)
       block(width: 2.2in, height: 4pt, fill: self.colors.primary, spacing: 0pt)
@@ -233,10 +248,15 @@
   header-right: self => self.info.logo,
   margin: (left: 1.25in, right: 0.85in, top: 1.6in, bottom: 0.95in),
   background: auto,
+  // fonts: each entry falls back to the next if unavailable
+  body-font: ("Iosevka SS07", "Libertinus Serif"),
+  title-font: ("Iosevka SS07", "Libertinus Serif"),
+  code-font: ("Iosevka SS07", "Iosevka Term SS07", "DejaVu Sans Mono"),
   ..args,
   body,
 ) = {
-  set text(size: 26pt)
+  set text(size: 26pt, font: body-font)
+  show raw: set text(font: code-font)
 
   let background = {
     if background == auto {
@@ -276,7 +296,7 @@
     ),
     config-methods(
       alert: (self: none, it) => text(
-        fill: self.colors.primary-dark,
+        fill: self.colors.accent,
         weight: "semibold",
         it,
       ),
@@ -284,16 +304,16 @@
     config-colors(
       // roles mapped from the brand palette (palette.typ)
       primary: palette.orange,          // sidebar / accents
-      primary-dark: rgb("#C6552E"),     // readable darkened orange for text
-                                        // (derived; not in the SVG palette)
       secondary: palette.purple,        // the palette's anchor color
       neutral-light: palette.gray-dark, // meta text (footer, …)
       neutral-lightest: rgb("#FFFFFF"),
       neutral-darkest: palette.ink,     // body text
+      accent: palette.accent,           // #alert emphasis
     ),
     config-store(
       footer: footer,
       header-right: header-right,
+      title-font: title-font,
     ),
     ..args,
   )

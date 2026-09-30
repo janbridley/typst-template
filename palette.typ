@@ -31,6 +31,7 @@
   gray-dark: rgb("#6C6575"),
   gray: rgb("#8F8899"),
   gray-darker: rgb("#4A4453"),
+  accent: rgb("#B9497B"),
 )
 
 /// Hex string of a color, e.g. `#FF9B7D`.

@@ -28,7 +28,7 @@ Slides come from `=` sections and `==` headings; the sidebar, header and
 footer are automatic.
 
 - Touying handles sections, numbering and animation.
-- Use #alert[alert] for emphasis — it picks up the sidebar orange.
+- Use #alert[alert] for emphasis — it picks up the accent color.
 - The left margin always clears the 0.7" sidebar graphic.
 
 #pause
