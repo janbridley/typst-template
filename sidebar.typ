@@ -176,7 +176,7 @@
     config: config,
     setting: it => align(
       alignment,
-      text(fill: self.colors.primary-dark, size: 1.6em, weight: "bold", it),
+      text(fill: self.colors.neutral-darkest, size: 1.6em, weight: "bold", it),
     ),
     body,
   )
