@@ -3,7 +3,7 @@
 
 #import "@preview/touying:0.8.0": *
 #import "sidebar.typ": *
-#import "palette.typ": palette
+#import "palette.typ": palette, palette-table
 
 #show: sidebar-theme.with(
   config-info(
@@ -63,15 +63,9 @@ $ E = m c^2 $
 == Brand colors
 
 Every color lives in `palette.typ`; use `palette.orange`, `palette.teal`, …
-anywhere in the deck.
+anywhere in the deck. The full palette:
 
-#grid(
-  columns: (1fr, 1fr, 1fr, 1fr),
-  gutter: 0.6em,
-  ..(palette.purple, palette.orange, palette.pink, palette.yellow, palette.teal, palette.blue, palette.mint, palette.ink).map(
-    c => block(fill: c, height: 1in, radius: 6pt),
-  ),
-)
+#text(size: 0.62em, palette-table())
 
 #show: appendix
 

@@ -32,3 +32,43 @@
   gray: rgb("#8F8899"),
   gray-darker: rgb("#4A4453"),
 )
+
+/// Hex string of a color, e.g. `#FF9B7D`.
+#let hex-of(color) = upper(color.to-hex())
+
+/// A swatch / name / hex reference table for the palette (or any color
+/// dictionary). Long palettes are split into two side-by-side tables.
+#let palette-table(colors: palette) = {
+  let rows(entries) = entries.map(((name, c)) => (
+    // rectangular swatch (hairline so pale colors stay visible)
+    block(
+      fill: c,
+      width: 100%,
+      height: 0.75em,
+      radius: 2pt,
+      stroke: 0.5pt + colors.at("gray", default: luma(150)),
+    ),
+    name,
+    hex-of(c),
+  )).flatten()
+  let make(entries) = table(
+    columns: (0.75in, 1fr, auto),
+    align: (center, left, left),
+    inset: 0.35em,
+    stroke: 0.5pt + colors.at("gray", default: luma(150)),
+    table.header([*Swatch*], [*Name*], [*Hex*]),
+    ..rows(entries),
+  )
+  let entries = colors.pairs()
+  if entries.len() > 12 {
+    let half = int(entries.len() / 2)
+    grid(
+      columns: (1fr, 1fr),
+      gutter: 1.2em,
+      make(entries.slice(0, half)),
+      make(entries.slice(half)),
+    )
+  } else {
+    make(entries)
+  }
+}
