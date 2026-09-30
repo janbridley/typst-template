@@ -1,0 +1,3 @@
+fonts/*.ttf binary
+fonts/*.ttc binary
+fonts/* linguist-vendored=true
