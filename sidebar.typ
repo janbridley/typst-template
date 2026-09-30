@@ -271,6 +271,8 @@
       // keep header/footer inside the margins so they don't run over the sidebar
       zero-margin-header: false,
       zero-margin-footer: false,
+      // `*bold*` stays ink-colored text; use `#alert[..]` for orange emphasis
+      show-strong-with-alert: false,
     ),
     config-methods(
       alert: (self: none, it) => text(
