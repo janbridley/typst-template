@@ -43,7 +43,7 @@ jobs:
           typst compile --font-path fonts main.typ 'slides/slide-{p}.svg'
 
       - name: Embed slides into README
-        run: python3 .github/scripts/embed_slides.py
+        run: perl .github/scripts/update-readme.pl
 
       - name: Upload rendered output
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
